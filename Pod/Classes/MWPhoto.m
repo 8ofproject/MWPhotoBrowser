@@ -12,6 +12,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MWPhoto.h"
 #import "MWPhotoBrowser.h"
+#import "DVBNetworkImageFixer.h"
 
 @interface MWPhoto () {
 
@@ -226,6 +227,7 @@
                                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                                                      if (error) {
                                                          MWLog(@"SDWebImage failed to download image: %@", error);
+                                                         image = [DVBNetworkImageFixer fixedImageFrom:imageURL];
                                                      }
                                                      _webImageOperation = nil;
                                                      self.underlyingImage = image;
